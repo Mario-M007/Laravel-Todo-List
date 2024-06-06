@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // redirect to task route
-Route::redirect('/','/task')->name('dashboard');
+Route::redirect('/','/task');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/task', [TaskController::class, 'index'])->name('task.index');
@@ -36,3 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
