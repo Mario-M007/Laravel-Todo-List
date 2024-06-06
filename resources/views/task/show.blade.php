@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <div class="task-container">
         <h1>Task:</h1>
         <a href="{{ route('task.edit', $task) }}" class="edit">
@@ -16,4 +16,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-app-layout>

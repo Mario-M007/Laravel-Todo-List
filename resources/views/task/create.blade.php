@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <div class="task-container">
         <div class="tasks">
             <h1>Create New Task</h1>
@@ -17,4 +17,4 @@
             </form>
         </div>
     </div>
-</x-layout>
+</x-app-layout>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-app-layout>
     <div class="task-container">
         <a href="{{ route('task.create') }}">
             New Task
@@ -30,4 +30,4 @@
         <!-- generate paginated links -->
         {{ $tasks->links() }}
     </div>
-</x-layout>
+</x-app-layout>
