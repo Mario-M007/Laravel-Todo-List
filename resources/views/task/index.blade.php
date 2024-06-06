@@ -26,5 +26,8 @@
                 </div>
             </div>
         @endforeach
+
+        <!-- generate paginated links -->
+        {{ $tasks->links() }}
     </div>
 </x-layout>
