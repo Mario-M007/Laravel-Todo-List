@@ -12,7 +12,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::query()->orderBy('created_at', 'asc')->paginate(10);
+        // filter task by user id
+        $tasks = Task::query()->where('user_id', request()->user()->id)->orderBy('created_at', 'asc')->paginate(10);
         return view('task.index', ['tasks' => $tasks]);
     }
 
@@ -37,7 +38,7 @@ class TaskController extends Controller
 
         $data['title'] = $data['task_title'];
         $data['description'] = $data['task_description'];
-        $data['user_id'] = 1;
+        $data['user_id'] = $request->user()->id;
         $task = Task::create($data);
 
         return to_route('task.show', $task)->with('message', 'Task was created');
@@ -49,6 +50,10 @@ class TaskController extends Controller
     public function show(Task $task)
     {
 
+        if ($task->user_id != request()->user()->id) {
+            // abort and show forbidden error msg
+            abort(403);
+        }
         return view('task.show', ['task' => $task]);
     }
 
@@ -57,6 +62,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        if ($task->user_id != request()->user()->id) {
+            // abort and show forbidden error msg
+            abort(403);
+        }
         return view('task.edit', ['task' => $task]);
     }
 
@@ -65,6 +74,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        if ($task->user_id != request()->user()->id) {
+            // abort and show forbidden error msg
+            abort(403);
+        }
         $data = $request->validate([
             'task_title' => ['required', 'string'],
             'task_description' => ['nullable', 'string'],
@@ -82,6 +95,11 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        if ($task->user_id != request()->user()->id) {
+            // abort and show forbidden error msg
+            abort(403);
+        }
+
         $task->delete();
 
         return to_route('task.index')->with('message', 'Task was deleted');
