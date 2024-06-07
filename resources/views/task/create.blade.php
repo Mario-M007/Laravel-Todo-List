@@ -1,22 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="task-container">
-    <div class="tasks">
+<div class="container">
         <h1>Create New Task</h1>
         <form action="{{ route('task.store') }}" method="post">
             @csrf
-            <label for="task_title">Enter Task</label>
-            <input type="text" name="task_title" id="task_title">
-            <label for="task_description">Enter Task Description</label>
-            <textarea name="task_description" id="task_description"></textarea>
+
+            <label for="title">Enter Task</label>
+            <input class="form-control" type="text" name="title" id="title">
+
+            <label for="description">Enter Task Description</label>
+            <textarea class="form-control" name="description" id="description"></textarea>
+
+            <label for="due_date">Due Date</label>
+            <input class="form-control" type="date" name="due_date" id="due_date">
+            
             <div class="buttons">
-                <a href="{{ route('task.index')}}" class="cancel">
+                <a class="btn btn-secondary" href="{{ route('task.index')}}" class="cancel">
                     Cancel
                 </a>
-                <input type="submit" value="Submit" class="submit-btn">
+                <input type="submit" value="Submit" class="btn btn-primary">
             </div>
         </form>
-    </div>
 </div>
 @endsection

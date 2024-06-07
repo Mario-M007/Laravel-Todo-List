@@ -12,8 +12,27 @@ class TaskController extends Controller
      */
     public function index()
     {
-        // filter task by user id
-        $tasks = Task::query()->where('user_id', request()->user()->id)->orderBy('created_at', 'asc')->paginate(10);
+        $query = Task::where('user_id', request()->user()->id);
+
+        // Filtering by status
+        if (request()->has('status') && request()->status != '') {
+            $query->where('status', request()->status);
+        }
+
+        // Filtering by due date
+        if (request()->has('due_date') && request()->due_date != '') {
+            $query->where('due_date', request()->due_date);
+        }
+
+        // Sorting
+        if (request()->has('sort_by')) {
+            $query->orderBy(request()->sort_by, request()->get('sort_order'));
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $tasks = $query->paginate(15);
+
         return view('task.index', ['tasks' => $tasks]);
     }
 
@@ -32,16 +51,15 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'task_title' => ['required', 'string'],
-            'task_description' => ['nullable', 'string'],
+            'title' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
+            'due_date' => ['nullable', 'date'],
         ]);
 
-        $data['title'] = $data['task_title'];
-        $data['description'] = $data['task_description'];
         $data['user_id'] = $request->user()->id;
         $task = Task::create($data);
 
-        return to_route('task.show', $task)->with('message', 'Task was created');
+        return to_route('task.show', $task);
     }
 
     /**
@@ -79,15 +97,15 @@ class TaskController extends Controller
             abort(403);
         }
         $data = $request->validate([
-            'task_title' => ['required', 'string'],
-            'task_description' => ['nullable', 'string'],
+            'title' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
+            'due_date' => ['nullable', 'date'],
+            'status' => ['required', 'string']
         ]);
 
-        $data['title'] = $data['task_title'];
-        $data['description'] = $data['task_description'];
         $task->update($data);
 
-        return to_route('task.show', $task)->with('message', 'Task was updated');
+        return to_route('task.show', $task);
     }
 
     /**
@@ -102,6 +120,6 @@ class TaskController extends Controller
 
         $task->delete();
 
-        return to_route('task.index')->with('message', 'Task was deleted');
+        return to_route('task.index');
     }
 }

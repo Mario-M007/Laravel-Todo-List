@@ -6,3 +6,65 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+// Custom styling
+.task-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.task {
+    width: calc(33.33% - 20px); /* display 3 tasks on same row hence 33.33% */
+    min-height: 175px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.task .title {
+    font-weight: bold;
+}
+
+.task .buttons {
+    margin-top: 10px;
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .task {
+        width: calc(50% - 20px); /* display 2 tasks on same row */
+    }
+}
+
+@media (max-width: 576px) {
+    .task {
+        width: 100%; /* display 1 task on same row % */
+    }
+}
+
+textarea {
+    resize: none;
+}
+
+.status {
+    border-radius: 20px;
+    width: fit-content;
+    padding: 0 5px; /* 0px for vertical and 5px for horizontal */
+}
+
+.pending {
+    background-color: #FEB9C8; /* Light Red */
+}
+
+.in-progress {
+    background-color: #F9E0C0; /* Light Yellow */
+}
+
+.completed {
+    background-color: #D1FADB; /* Light Green */
+}
