@@ -15,7 +15,7 @@
     <!-- Filter and Sort Form -->
     <form method="GET" action="{{ route('task.index') }}" class="mt-3 mb-3">
         <div class="mt-1">
-            <label for="status">Status</label>
+            <label for="status">Filter by Status</label>
             <select name="status" id="status" class="form-select" onchange="this.form.submit()">
                 <option value="">All Statuses</option>
                 <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending</option>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="mt-3">
-            <label for="due_date">Due Date</label>
+            <label for="due_date">Filter by Due Date</label>
             <input type="date" name="due_date" id="due_date" class="form-control" value="{{ request('due_date') }}"
                 onchange="this.form.submit()">
             <input type="reset" class="btn btn-secondary mt-2" value="Reset Date" onclick="resetDateFilter()">

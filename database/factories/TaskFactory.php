@@ -18,7 +18,10 @@ class TaskFactory extends Factory
     {
         return [
             'title' => fake()->word(),
-            'user_id' => 1
+            'description' => fake()->optional()->paragraph(),
+            'status' => fake()->randomElement(['Pending', 'In Progress', 'Completed']),
+            'due_date' => fake()->optional()->date(),
+            'user_id' => 2
         ];
     }
 }
