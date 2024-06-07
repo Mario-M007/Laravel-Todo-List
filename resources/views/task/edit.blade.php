@@ -8,16 +8,16 @@
         <!-- override the post method -->
         @method('PUT')
 
-        <label for="title">Enter Task</label>
+        <label class="mt-3" for="title">Enter Task Title</label>
         <input type="text" class="form-control" name="title" id="title" value="{{ $task->title }}">
 
-        <label for="description">Enter Task Description</label>
+        <label class="mt-3" for="description">Enter Task Description</label>
         <textarea class="form-control" name="description" id="description">{{ $task->description }}</textarea>
 
-        <label for="due_date">Due Date</label>
+        <label class="mt-3" for="due_date">Due Date</label>
         <input type="date" class="form-control" name="due_date" id="due_date" value="{{ $task->due_date }}">
 
-        <label for="status">Status</label>
+        <label class="mt-3" for="status">Status</label>
         <select class="form-select" name="status" id="status">
             <option value="Pending" {{ $task->status == 'Pending' ? 'selected' : '' }}>Pending</option>
             <option value="In Progress" {{ $task->status == 'In Progress' ? 'selected' : '' }}>In
@@ -26,11 +26,11 @@
             </option>
         </select>
 
-        <div class="buttons">
-            <a href="{{ route('task.index') }}" class="cancel">
+        <div class="buttons mt-3">
+            <a class="btn btn-secondary" href="{{ route('task.index') }}" class="cancel">
                 Cancel
             </a>
-            <input type="submit" value="submit">
+            <input type="submit" value="Submit" class="btn btn-primary">
         </div>
     </form>
 </div>

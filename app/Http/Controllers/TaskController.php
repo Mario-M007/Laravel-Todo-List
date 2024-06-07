@@ -25,7 +25,7 @@ class TaskController extends Controller
         }
 
         // Sorting
-        if (request()->has('sort_by')) {
+        if (request()->has('sort_by') && request()->sort_by != '') {
             $query->orderBy(request()->sort_by, request()->get('sort_order'));
         } else {
             $query->orderBy('created_at', 'desc');

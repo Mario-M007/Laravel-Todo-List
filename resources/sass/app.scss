@@ -18,7 +18,8 @@
 .task {
     width: calc(33.33% - 20px); /* display 3 tasks on same row hence 33.33% */
     min-height: 175px;
-    border: 1px solid #ccc;
+    border: 1px solid #dee2e6;
+    background: #fff;
     border-radius: 10px;
     padding: 10px;
     display: flex;
@@ -30,8 +31,10 @@
     font-weight: bold;
 }
 
-.task .buttons {
-    margin-top: 10px;
+.task-action-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
 }
 
 /* Adjustments for smaller screens */
@@ -67,4 +70,8 @@ textarea {
 
 .completed {
     background-color: #D1FADB; /* Light Green */
+}
+
+.task-details {
+    width: 100%;
 }
