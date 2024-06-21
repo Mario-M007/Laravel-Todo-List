@@ -42,6 +42,7 @@ class TaskController extends Controller
     public function create()
     {
         // return the create.blade.php file in the task folder that is inside the views folder
+        // validate user input
         return view('task.create');
     }
 
